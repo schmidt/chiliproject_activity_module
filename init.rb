@@ -11,17 +11,32 @@ end
 
 require 'dispatcher'
 Dispatcher.to_prepare :redmine_activity_module do
-  require_dependency 'activities_controller'
   require_dependency 'application_controller'
   require_dependency 'redmine/access_control'
 
-  ActivitiesController.class_eval do
-    def verify_activities_module_activated
-      render_403 unless @project && @project.enabled_module_names.include?("activity")
-    end
+  case Redmine::VERSION::MAJOR
+  when 0
+    require_dependency 'projects_controller'
+    ProjectsController.class_eval do
+      def verify_activities_module_activated
+        render_403 unless @project && @project.enabled_module_names.include?("activity")
+      end
 
-    before_filter :verify_activities_module_activated
-    private :verify_activities_module_activated
+      before_filter :verify_activities_module_activated, :only => 'activity'
+      private :verify_activities_module_activated
+    end
+  when 1
+    require_dependency 'activities_controller'
+    ActivitiesController.class_eval do
+      def verify_activities_module_activated
+        render_403 unless @project && @project.enabled_module_names.include?("activity")
+      end
+
+      before_filter :verify_activities_module_activated
+      private :verify_activities_module_activated
+    end
+  else
+    raise 'Unsupported Redmine version'
   end
 
   ApplicationController.master_helper_module.class_eval do
