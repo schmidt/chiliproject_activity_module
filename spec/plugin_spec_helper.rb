@@ -1,0 +1,2 @@
+module RedmineActivityModule::SpecHelper
+end
