@@ -1,9 +1,50 @@
-= Redmine Activity Module Plugin
+= Redmine/ChiliProject Activity Module Plugin
 
-This Plugin makes activity a module, such that it can be activated and deactivated on a per-project setting.
+This Plugin makes activity a module, such that it can be activated and
+deactivated on a per-project setting.
 
-= Licence
+It also includes a migration which
+
+* activates the newly introduced activity module in all existing projects
+* adds the activity module to the set of default modules for new projects
+
+It therefore simply restores the default Redmine/ChiliProject behaviour for all
+existing projects. You may then selectively deactivate the activity module in
+single projects selectively.
+
+
+== Requirements
+
+This plugin aims to be compatible with 
+
+* Redmine 0.9.x
+* Redmine 1.0.x 
+* Redmine 1.1.x
+* ChiliProject 1.1.x
+
+If you are running into compatibility issues, please report a bug in the
+project's issue tracker.
+
+
+== Installation
+
+Please follow the default plugin installation instructions for
+Redmine/ChiliProject. 
+
+Run the above mentioned migration at will.
+
+
+== Deinstallation
+
+Optionally run the down migration, that is included in this plugin. It will
+remove the activity module from all places, where it might be stored in the
+database. On the other hand, these stale records should not be harmful.
+
+Afterwards simple remove the plugin's directory from your vendor/plugins
+directory.
+
+== Licence
 
 (c) 2011 - Gregor Schmidt - Finn GmbH
 
-This plugin is licensed under the GNU GPL v2. See LICENSE.txt and GPL.txt for details. 
+This plugin is licensed under the GNU GPL v2. See COPYRIGHT.txt and GPL.txt for details. 
