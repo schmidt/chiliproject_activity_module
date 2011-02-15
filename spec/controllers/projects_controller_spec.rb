@@ -1,48 +1,5 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 
-if Redmine::VERSION::MAJOR == 0
-  describe ProjectsController do
-    before :each do
-      @controller.stub!(:set_localization)
-
-      @role = Factory.create(:non_member)
-
-      @user = Factory.create(:user)
-      User.stub!(:current).and_return @user
-
-      @params = {}
-    end
-
-    describe '/activity' do
-      describe 'with activated activity module' do
-        before do
-          @project = Factory.create(:project, :enabled_module_names => %w[activity wiki])
-          @params[:id] = @project.id
-        end
-
-        it 'renders activity' do
-          get 'activity', @params
-          response.should be_success
-          response.should render_template 'activity'
-        end
-      end
-
-      describe 'without activated activity module' do
-        before do
-          @project = Factory.create(:project, :enabled_module_names => %w[wiki])
-          @params[:id] = @project.id
-        end
-
-        it 'renders 403' do
-          get 'activity', @params
-          response.status.should == '403 Forbidden'
-          response.should render_template 'common/403'
-        end
-      end
-    end
-  end
-end
-
 describe ProjectsController do
   before :each do
     @controller.stub!(:set_localization)
@@ -100,8 +57,23 @@ describe ProjectsController do
     end
   end
 
-  describe 'add' do
+  ##
+  # the action to create a new project is called 'add' in 0.9 and new in 1.x
+  #
+  if Redmine::VERSION::MAJOR == 0
+    create_new_project_action = 'add'
+  else
+    create_new_project_action = 'new'
+  end
+
+  describe create_new_project_action do
     integrate_views
+
+    if Redmine::VERSION::MAJOR == 0
+      enabled_module_checkbox_name = 'enabled_modules[]'
+    else
+      enabled_module_checkbox_name = 'project[enabled_module_names][]'
+    end
 
     before(:all) do
       @previous_projects_modules = Setting.default_projects_modules
@@ -116,19 +88,19 @@ describe ProjectsController do
         Setting.default_projects_modules = %w[activity wiki]
       end
 
-      it 'renders add' do
-        get 'add', @params
+      it "renders #{create_new_project_action}" do
+        get create_new_project_action, @params
         response.should be_success
-        response.should render_template 'add'
+        response.should render_template create_new_project_action
       end
 
       it 'renders available modules list with activity being selected' do
-        get 'add', @params
+        get create_new_project_action, @params
 
         response.should have_tag('fieldset.box:last-of-type') do
           with_tag 'legend', :text => 'Modules'
-          with_tag 'input[name^=enabled_modules][value=wiki][checked=checked]'
-          with_tag 'input[name^=enabled_modules][value=activity][checked=checked]'
+          with_tag "input[name='#{enabled_module_checkbox_name}'][value=wiki][checked=checked]"
+          with_tag "input[name='#{enabled_module_checkbox_name}'][value=activity][checked=checked]"
         end
       end
     end
@@ -138,20 +110,20 @@ describe ProjectsController do
         Setting.default_projects_modules = %w[wiki]
       end
 
-      it 'renders add' do
-        get 'add', @params
+      it "renders #{create_new_project_action}" do
+        get create_new_project_action, @params
         response.should be_success
-        response.should render_template 'add'
+        response.should render_template create_new_project_action
       end
 
       it 'renders available modules list without activity being selected' do
-        get 'add', @params
+        get create_new_project_action, @params
 
         response.should have_tag('fieldset.box:last-of-type') do
           with_tag 'legend', :text => 'Modules'
-          with_tag 'input[name^=enabled_modules][value=wiki][checked=checked]'
-          with_tag 'input[name^=enabled_modules][value=activity]'
-          without_tag 'input[name^=enabled_modules][value=activity][checked=checked]'
+          with_tag    "input[name='#{enabled_module_checkbox_name}'][value=wiki][checked=checked]"
+          with_tag    "input[name='#{enabled_module_checkbox_name}'][value=activity]"
+          without_tag "input[name='#{enabled_module_checkbox_name}'][value=activity][checked=checked]"
         end
       end
     end
@@ -159,6 +131,13 @@ describe ProjectsController do
 
   describe 'settings' do
     integrate_views
+
+    if Redmine::VERSION::MAJOR == 0
+      enabled_module_checkbox_name = 'enabled_modules[]'
+    else
+      enabled_module_checkbox_name = 'enabled_module_names[]'
+    end
+
 
     describe 'with activity in Setting.default_projects_modules' do
       before do
@@ -176,9 +155,9 @@ describe ProjectsController do
         get 'settings', @params.merge(:tab => 'modules')
 
         response.should have_tag('#modules-form') do
-          with_tag 'input[name^=enabled_modules][value=wiki][checked=checked]'
+          with_tag "input[name='#{enabled_module_checkbox_name}'][value=wiki][checked=checked]"
 
-          with_tag 'input[name^=enabled_modules][value=activity][checked=checked]'
+          with_tag "input[name='#{enabled_module_checkbox_name}'][value=activity][checked=checked]"
         end
       end
     end
@@ -199,10 +178,47 @@ describe ProjectsController do
         get 'settings', @params.merge(:tab => 'modules')
 
         response.should have_tag('#modules-form') do
-          with_tag 'input[name^=enabled_modules][value=wiki][checked=checked]'
+          with_tag    "input[name='#{enabled_module_checkbox_name}'][value=wiki][checked=checked]"
 
-          with_tag 'input[name^=enabled_modules][value=activity]'
-          without_tag 'input[name^=enabled_modules][value=activity][checked=checked]'
+          with_tag    "input[name='#{enabled_module_checkbox_name}'][value=activity]"
+          without_tag "input[name='#{enabled_module_checkbox_name}'][value=activity][checked=checked]"
+        end
+      end
+    end
+  end
+
+
+
+
+  ##
+  # Redmine 0.9 only tests, the matchin 1.x test may be found in the
+  # activities_controller_spec.rb
+  #
+  if Redmine::VERSION::MAJOR == 0
+    describe '/activity' do
+      describe 'with activated activity module' do
+        before do
+          @project = Factory.create(:project, :enabled_module_names => %w[activity wiki])
+          @params[:id] = @project.id
+        end
+
+        it 'renders activity' do
+          get 'activity', @params
+          response.should be_success
+          response.should render_template 'activity'
+        end
+      end
+
+      describe 'without activated activity module' do
+        before do
+          @project = Factory.create(:project, :enabled_module_names => %w[wiki])
+          @params[:id] = @project.id
+        end
+
+        it 'renders 403' do
+          get 'activity', @params
+          response.status.should == '403 Forbidden'
+          response.should render_template 'common/403'
         end
       end
     end
