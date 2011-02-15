@@ -19,7 +19,7 @@ Dispatcher.to_prepare :redmine_activity_module do
     require_dependency 'projects_controller'
     ProjectsController.class_eval do
       def verify_activities_module_activated
-        render_403 unless @project && @project.enabled_module_names.include?("activity")
+        render_403 unless @project && @project.module_enabled?("activity")
       end
 
       before_filter :verify_activities_module_activated, :only => 'activity'
@@ -29,7 +29,7 @@ Dispatcher.to_prepare :redmine_activity_module do
     require_dependency 'activities_controller'
     ActivitiesController.class_eval do
       def verify_activities_module_activated
-        render_403 unless @project && @project.enabled_module_names.include?("activity")
+        render_403 unless @project && @project.module_enabled?("activity")
       end
 
       before_filter :verify_activities_module_activated
@@ -42,7 +42,7 @@ Dispatcher.to_prepare :redmine_activity_module do
   ApplicationController.master_helper_module.class_eval do
     def allowed_node?(node, user, project)
       if node.name == :activity
-        project.enabled_module_names.include? "activity"
+        project.module_enabled?("activity")
       else
         super
       end
