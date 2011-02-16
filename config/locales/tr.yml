@@ -1,0 +1,5 @@
+# Turkish translations for Ruby on Rails 
+# by Ozgun Ataman (ozataman@gmail.com)
+
+tr:
+  project_module_activity: Faaliyet

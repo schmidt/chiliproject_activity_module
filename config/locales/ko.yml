@@ -1,0 +1,7 @@
+# Korean translations for Ruby on Rails 
+# by Kihyun Yoon(ddumbugie@gmail.com),http://plenum.textcube.com/
+# by John Hwang (jhwang@tavon.org),http://github.com/tavon
+# by Yonghwan SO(please insert your email), last update at 2009-09-11
+# last update at 2010-01-23 by Kihyun Yoon
+ko:
+  project_module_activity: 작업종류

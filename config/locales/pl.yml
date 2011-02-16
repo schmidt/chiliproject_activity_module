@@ -1,0 +1,6 @@
+# Polish translations for Ruby on Rails
+# by Jacek Becela (jacek.becela@gmail.com, http://github.com/ncr)
+# by Krzysztof Podejma (kpodejma@customprojects.pl, http://www.customprojects.pl)
+
+pl:
+  project_module_activity: Aktywność

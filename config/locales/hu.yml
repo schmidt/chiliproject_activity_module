@@ -1,0 +1,8 @@
+# Hungarian translations for Ruby on Rails 
+# by Richard Abonyi (richard.abonyi@gmail.com)
+# thanks to KKata, replaced and #hup.hu
+# Cleaned up by László Bácsi (http://lackac.hu)
+# updated by kfl62 kfl62g@gmail.com
+
+hu:
+  project_module_activity: Aktivitás

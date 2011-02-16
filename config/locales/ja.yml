@@ -1,0 +1,6 @@
+# Japanese translations for Ruby on Rails 
+# by Akira Matsuda (ronnie@dio.jp)
+# AR error messages are basically taken from Ruby-GetText-Package. Thanks to Masao Mutoh.
+
+ja:
+  project_module_activity: 活動

@@ -1,0 +1,5 @@
+# Serbian default (Cyrillic) translations for Ruby on Rails
+# by Dejan Dimić (dejan.dimic@gmail.com)
+
+"sr":
+  project_module_activity: Aktivnost

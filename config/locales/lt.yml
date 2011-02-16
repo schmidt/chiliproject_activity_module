@@ -1,0 +1,7 @@
+# Lithuanian translations for Ruby on Rails
+# by Laurynas Butkus (laurynas.butkus@gmail.com)
+# Redmine translation by Gediminas Muižis gediminas.muizis@gmail.com
+#                      and Sergej Jegorov sergej.jegorov@gmail.com
+#					   and Gytis Gurklys gytis.gurklys@gmail.com
+lt:
+  project_module_activity: Veikla

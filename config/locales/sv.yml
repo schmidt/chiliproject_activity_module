@@ -1,0 +1,6 @@
+# Swedish translation for Ruby on Rails
+# by Johan Lundström (johanlunds@gmail.com),
+# with parts taken from http://github.com/daniel/swe_rails
+
+sv:
+  project_module_activity: Aktivitet

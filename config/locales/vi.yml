@@ -1,0 +1,7 @@
+# Vietnamese translation for Ruby on Rails
+# by
+#   Do Hai Bac (dohaibac@gmail.com)
+#   Dao Thanh Ngoc (ngocdaothanh@gmail.com, http://github.com/ngocdaothanh/rails-i18n/tree/master)
+
+vi:
+  project_module_activity: Hoạt động

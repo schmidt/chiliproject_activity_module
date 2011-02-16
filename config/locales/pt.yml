@@ -1,0 +1,4 @@
+# Portuguese localization for Ruby on Rails
+# by Ricardo Otero <oterosantos@gmail.com>
+pt:
+  project_module_activity: Actividade

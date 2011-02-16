@@ -1,0 +1,5 @@
+# Croatian translations for Ruby on Rails 
+# by Helix d.o.o. (info@helix.hr)
+
+hr:
+  project_module_activity: Aktivnost
