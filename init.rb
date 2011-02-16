@@ -51,7 +51,11 @@ Dispatcher.to_prepare :redmine_activity_module do
 
   Redmine::AccessControl.metaclass.class_eval do
     def available_project_modules_with_activity
-      @available_project_modules_with_activity ||= available_project_modules_without_activity.unshift("activity")
+      list = available_project_modules_without_activity
+      unless list.include? 'activity'
+        list.unshift 'activity'
+      end
+      list
     end
     alias_method_chain :available_project_modules, :activity unless instance_methods.include? "available_project_modules_without_activity"
   end
