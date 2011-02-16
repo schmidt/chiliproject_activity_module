@@ -29,7 +29,7 @@ Dispatcher.to_prepare :redmine_activity_module do
     require_dependency 'activities_controller'
     ActivitiesController.class_eval do
       def verify_activities_module_activated
-        render_403 unless @project && @project.module_enabled?("activity")
+        render_403 if @project && !@project.module_enabled?("activity")
       end
 
       before_filter :verify_activities_module_activated
@@ -58,5 +58,24 @@ Dispatcher.to_prepare :redmine_activity_module do
       list
     end
     alias_method_chain :available_project_modules, :activity unless instance_methods.include? "available_project_modules_without_activity"
+  end
+
+  if RAILS_ENV == 'test'
+    def (ActionController::IntegrationTest).inherited(sub)
+      if sub.name == 'MenuManagerTest'
+        sub.send(:define_method, :setup) do
+          RedmineActivityModule.activate_activity_module_for_all_projects
+        end
+      end
+      super
+    end
+    def (ActionController::TestCase).inherited(sub)
+      if sub.name == 'ActivitiesControllerTest'
+        sub.send(:define_method, :setup) do
+          RedmineActivityModule.activate_activity_module_for_all_projects
+        end
+      end
+      super
+    end
   end
 end
