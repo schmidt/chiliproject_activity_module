@@ -28,6 +28,14 @@ Dispatcher.to_prepare :redmine_activity_module do
       before_filter :verify_activities_module_activated, :only => 'activity'
       private :verify_activities_module_activated
     end
+
+    require_dependency 'project'
+    Project.class_eval do
+      # Returns an array of the enabled modules names (9284a32c, JPL)
+      def enabled_module_names
+        enabled_modules.collect(&:name)
+      end
+    end
   when 1
     require_dependency 'activities_controller'
     ActivitiesController.class_eval do

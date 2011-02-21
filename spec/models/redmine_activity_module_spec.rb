@@ -6,12 +6,14 @@ describe RedmineActivityModule do
       before do
         @enabled_module_names = %w[activity issue_tracking time_tracking news wiki]
         2.times {
-          Factory.build(:project, :enabled_module_names => @enabled_module_names)
+          Factory.create(:project, :enabled_module_names => @enabled_module_names)
         }
       end
 
       it 'keeps all previously activated modules' do
         RedmineActivityModule.activate_activity_module_for_all_projects
+
+        Project.find(:all).should_not be_empty
         @enabled_module_names.each do |name|
           Project.find(:all).should be_all { |p| p.enabled_module_names.include?(name) }
         end
@@ -22,17 +24,20 @@ describe RedmineActivityModule do
       before do
         @enabled_module_names = %w[issue_tracking time_tracking news wiki]
         2.times {
-          Factory.build(:project, :enabled_module_names => @enabled_module_names)
+          Factory.create(:project, :enabled_module_names => @enabled_module_names)
         }
       end
 
       it 'activates the activity module' do
         RedmineActivityModule.activate_activity_module_for_all_projects
+        Project.find(:all).should_not be_empty
         Project.find(:all).should be_all { |p| p.enabled_module_names.include?("activity") }
       end
 
       it 'keeps all previously activated modules' do
         RedmineActivityModule.activate_activity_module_for_all_projects
+
+        Project.find(:all).should_not be_empty
         @enabled_module_names.each do |name|
           Project.find(:all).should be_all { |p| p.enabled_module_names.include?(name) }
         end
@@ -45,17 +50,21 @@ describe RedmineActivityModule do
       before do
         @enabled_module_names = %w[activity issue_tracking time_tracking news wiki]
         2.times {
-          Factory.build(:project, :enabled_module_names => @enabled_module_names)
+          Factory.create(:project, :enabled_module_names => @enabled_module_names)
         }
       end
 
       it 'removes activity from list of activated modules' do
         RedmineActivityModule.deactivate_activity_module_for_all_projects
+
+        Project.find(:all).should_not be_empty
         Project.find(:all).should be_none { |p| p.enabled_module_names.include? 'activity' }
       end
 
       it 'keeps all other activated modules' do
         RedmineActivityModule.deactivate_activity_module_for_all_projects
+
+        Project.find(:all).should_not be_empty
         (@enabled_module_names - ['activity']).each do |name|
           Project.find(:all).should be_all { |p| p.enabled_module_names.include?(name) }
         end
@@ -66,17 +75,21 @@ describe RedmineActivityModule do
       before do
         @enabled_module_names = %w[issue_tracking time_tracking news wiki]
         2.times {
-          Factory.build(:project, :enabled_module_names => @enabled_module_names)
+          Factory.create(:project, :enabled_module_names => @enabled_module_names)
         }
       end
 
       it 'does not activates the activity module' do
         RedmineActivityModule.deactivate_activity_module_for_all_projects
+
+        Project.find(:all).should_not be_empty
         Project.find(:all).should be_none { |p| p.enabled_module_names.include?("activity") }
       end
 
       it 'keeps all previously activated modules' do
         RedmineActivityModule.deactivate_activity_module_for_all_projects
+
+        Project.find(:all).should_not be_empty
         @enabled_module_names.each do |name|
           Project.find(:all).should be_all { |p| p.enabled_module_names.include?(name) }
         end
