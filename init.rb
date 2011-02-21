@@ -1,13 +1,16 @@
 require 'redmine'
+require 'redmine_activity_module'
+require 'redmine_activity_module/version'
 
 Redmine::Plugin.register :redmine_activity_module do
   name 'Redmine Activity Module Plugin'
   author 'Gregor Schmidt'
   description 'This Plugin makes activity a module, such that it can be activated and deactivated on a per-project setting.'
-  version '1.0.0'
+  version RedmineActivityModule::Version.full
   url 'http://github.com/finnlabs/redmine_activity_module'
   author_url 'http://www.finn.de/'
 end
+
 
 require 'dispatcher'
 Dispatcher.to_prepare :redmine_activity_module do
