@@ -1,0 +1,4 @@
+= 1.0.0 - 2011-02-21 - Initial release
+
+This Plugin makes activity a module, such that it can be activated and
+deactivated on a per-project setting.
