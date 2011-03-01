@@ -1,5 +1,7 @@
-Budget is a Redmine plugin to manage the set of deliverables for each project,
-automatically calculating key performance indicators.
+Redmine/ChiliProject Activity Module Plugin
+
+This Plugin makes activity a module, such that it can be activated and
+deactivated on a per-project setting.
 
 Copyright (C) 2011 Gregor Schmidt - Finn GmbH - Berlin, Germany
 
