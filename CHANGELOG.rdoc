@@ -1,3 +1,9 @@
+= 1.0.1 - 2011-03-01
+
+Bug fixes:
+
+* Fixing project name and description in COPYRIGHT.txt
+
 = 1.0.0 - 2011-02-21 - Initial release
 
 This Plugin makes activity a module, such that it can be activated and
