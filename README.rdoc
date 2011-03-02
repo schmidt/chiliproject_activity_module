@@ -43,6 +43,14 @@ database. On the other hand, these stale records should not be harmful.
 Afterwards simple remove the plugin's directory from your vendor/plugins
 directory.
 
+== Known issues
+
+This plugin was mainly developed to deactivate the link in the main menu.
+Unfortunately, this is not the only links targetting the activity control. There
+are atom links in various places, e.g. each wiki page, that simply rely on the
+fact, that there will always be an activity module. These links are currently
+not removed.
+
 == Licence
 
 (c) 2011 - Gregor Schmidt - Finn GmbH
