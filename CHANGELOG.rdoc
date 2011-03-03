@@ -1,3 +1,9 @@
+= 1.0.2 - 2011-03-03
+
+Bug fixes:
+
+* Fixing the version number in machine readable parts
+
 = 1.0.1 - 2011-03-01
 
 Bug fixes:

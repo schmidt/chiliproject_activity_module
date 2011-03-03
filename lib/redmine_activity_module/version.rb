@@ -17,7 +17,7 @@ module RedmineActivityModule
     end
     
     def patch
-      0
+      2
     end
 
     extend self
