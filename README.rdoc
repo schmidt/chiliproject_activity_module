@@ -15,12 +15,13 @@ single projects selectively.
 
 == Requirements
 
-This plugin aims to be compatible with 
+This plugin aims to be compatible with
 
-* Redmine 0.9.x
-* Redmine 1.0.x 
-* Redmine 1.1.x
-* ChiliProject 1.1.x
+* ChiliProject 1.x
+
+It was developed on ChiliProject 1.1 and then backported to Redmine 0.9.
+Currently it is only used with ChiliProject, so it may not run on Redmine
+anymore. Use at own risk.
 
 If you are running into compatibility issues, please report a bug in the
 project's issue tracker.
@@ -29,7 +30,7 @@ project's issue tracker.
 == Installation
 
 Please follow the default plugin installation instructions for
-Redmine/ChiliProject. 
+Redmine/ChiliProject.
 
 Run the above mentioned migration at will.
 
@@ -43,6 +44,22 @@ database. On the other hand, these stale records should not be harmful.
 Afterwards simple remove the plugin's directory from your vendor/plugins
 directory.
 
+
+== Development
+
+To run the tests, you will need a current version of our {Redmine/ChiliProject
+Dev Tools}[https://github.com/finnlabs/redmine-dev-tools]. After running
+
+    bundle install
+
+You should be able to execute the tests with
+
+    rake redmine:rspec:wiki_tabs
+
+If these instructions are insufficient, please open a ticket in the GitHub issue
+tracker with information, where you are stuck.
+
+
 == Known issues
 
 This plugin was mainly developed to deactivate the link in the main menu.
@@ -55,4 +72,4 @@ not removed.
 
 (c) 2011 - Gregor Schmidt - Finn GmbH
 
-This plugin is licensed under the GNU GPL v2. See COPYRIGHT.txt and GPL.txt for details. 
+This plugin is licensed under the GNU GPL v2. See COPYRIGHT.txt and GPL.txt for details.
