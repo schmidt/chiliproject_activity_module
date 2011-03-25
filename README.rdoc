@@ -27,6 +27,11 @@ If you are running into compatibility issues, please report a bug in the
 project's issue tracker.
 
 
+== Screenshots
+
+https://github.com/finnlabs/redmine_activity_module/raw/master/doc/screen-capture.png
+
+
 == Installation
 
 Please follow the default plugin installation instructions for
