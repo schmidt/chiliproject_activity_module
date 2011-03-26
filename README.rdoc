@@ -59,7 +59,7 @@ Dev Tools}[https://github.com/finnlabs/redmine-dev-tools]. After running
 
 You should be able to execute the tests with
 
-    rake redmine:rspec:wiki_tabs
+    rake redmine:rspec:activity_module
 
 If these instructions are insufficient, please open a ticket in the GitHub issue
 tracker with information, where you are stuck.
