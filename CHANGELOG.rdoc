@@ -1,3 +1,10 @@
+= 1.0.3 - 2011-05-30
+
+Bug fixes:
+
+* fixing errors and adding some information to README
+
+
 = 1.0.2 - 2011-03-03
 
 Bug fixes:
