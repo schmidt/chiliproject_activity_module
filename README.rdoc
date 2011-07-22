@@ -18,10 +18,7 @@ single projects selectively.
 This plugin aims to be compatible with
 
 * ChiliProject 1.x
-
-It was developed on ChiliProject 1.1 and then backported to Redmine 0.9.
-Currently it is only used with ChiliProject, so it may not run on Redmine
-anymore. Use at own risk.
+* ChiliProject 2.x
 
 If you are running into compatibility issues, please report a bug in the
 project's issue tracker.
@@ -46,7 +43,7 @@ Optionally run the down migration, that is included in this plugin. It will
 remove the activity module from all places, where it might be stored in the
 database. On the other hand, these stale records should not be harmful.
 
-Afterwards simple remove the plugin's directory from your vendor/plugins
+Afterwards simply remove the plugin's directory from your vendor/plugins
 directory.
 
 
@@ -72,6 +69,9 @@ Unfortunately, this is not the only links targetting the activity control. There
 are atom links in various places, e.g. each wiki page, that simply rely on the
 fact, that there will always be an activity module. These links are currently
 not removed.
+
+There are known issues when running in development mode. If you are observing
+strange behaviour try deactivation the reloader or run in production mode.
 
 == Licence
 

@@ -9,7 +9,7 @@ module RedmineActivityModule
     end
 
     def major
-      1
+      2
     end
     
     def minor
@@ -17,7 +17,7 @@ module RedmineActivityModule
     end
     
     def patch
-      3
+      0
     end
 
     extend self

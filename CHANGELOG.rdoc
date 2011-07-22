@@ -1,3 +1,10 @@
+= 2.0.0 - 2011-07-22
+
+Major updates:
+
+* works with ChiliProject 2.0
+* drops compatibility for Redmine 0.9.
+
 = 1.0.3 - 2011-05-30
 
 Bug fixes:
