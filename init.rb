@@ -17,37 +17,14 @@ Dispatcher.to_prepare :redmine_activity_module do
   require_dependency 'application_controller'
   require_dependency 'redmine/access_control'
 
-  case Redmine::VERSION::MAJOR
-  when 0
-    require_dependency 'projects_controller'
-    ProjectsController.class_eval do
-      def verify_activities_module_activated
-        render_403 unless @project && @project.module_enabled?("activity")
-      end
-
-      before_filter :verify_activities_module_activated, :only => 'activity'
-      private :verify_activities_module_activated
+  require_dependency 'activities_controller'
+  ActivitiesController.class_eval do
+    def verify_activities_module_activated
+      render_403 if @project && !@project.module_enabled?("activity")
     end
 
-    require_dependency 'project'
-    Project.class_eval do
-      # Returns an array of the enabled modules names (9284a32c, JPL)
-      def enabled_module_names
-        enabled_modules.collect(&:name)
-      end
-    end
-  when 1
-    require_dependency 'activities_controller'
-    ActivitiesController.class_eval do
-      def verify_activities_module_activated
-        render_403 if @project && !@project.module_enabled?("activity")
-      end
-
-      before_filter :verify_activities_module_activated
-      private :verify_activities_module_activated
-    end
-  else
-    raise 'Unsupported Redmine version'
+    before_filter :verify_activities_module_activated
+    private :verify_activities_module_activated
   end
 
   ApplicationController.master_helper_module.class_eval do
@@ -60,7 +37,7 @@ Dispatcher.to_prepare :redmine_activity_module do
     end
   end
 
-  Redmine::AccessControl.metaclass.class_eval do
+  class << Redmine::AccessControl; self; end.class_eval do
     def available_project_modules_with_activity
       list = available_project_modules_without_activity
       unless list.include? 'activity'
