@@ -98,7 +98,7 @@ describe ProjectsController do
         get create_new_project_action, @params
 
         response.should have_tag('fieldset.box:last-of-type') do
-          with_tag 'legend', :text => 'Modules'
+          with_tag 'legend', :text => /Modules.*/
           with_tag "input[name='#{enabled_module_checkbox_name}'][value=wiki][checked=checked]"
           with_tag "input[name='#{enabled_module_checkbox_name}'][value=activity][checked=checked]"
         end
@@ -120,7 +120,7 @@ describe ProjectsController do
         get create_new_project_action, @params
 
         response.should have_tag('fieldset.box:last-of-type') do
-          with_tag 'legend', :text => 'Modules'
+          with_tag 'legend', :text => /Modules.*/
           with_tag    "input[name='#{enabled_module_checkbox_name}'][value=wiki][checked=checked]"
           with_tag    "input[name='#{enabled_module_checkbox_name}'][value=activity]"
           without_tag "input[name='#{enabled_module_checkbox_name}'][value=activity][checked=checked]"
