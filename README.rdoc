@@ -36,6 +36,35 @@ Please follow the default plugin installation instructions for ChiliProject.
 Run the above mentioned migration at will.
 
 
+== Update from versions before 3.0 to version 3.0 and later
+
+Since we have renamed the recommended plugin name with version 3.0, there is
+some mangeling with the migrations, when you making the update. Please follow
+these steps to make it work.
+
+1. Make a backup of your database.
+2. Seriously, do a backup.
+3. Execute the following SQL snippet on the database, you are using for your
+   ChiliProject
+
+    UPDATE schema_migrations
+    SET version = REPLACE(version, 'redmine_activity_module', 'chiliproject_activity_module');
+
+You may do this, by using the commandline tools of your database vendor or by
+starting a script/console from within the ChiliProject root folder
+
+    script/console production
+
+    > ActiveRecord::Base.connection.execute "UPDATE schema_migrations SET version = REPLACE(version, 'redmine_activity_module', 'chiliproject_activity_module');"
+
+Be sure, that `redmine_activity_module` was the old plugins directory name. Also
+make sure, that you renamed it to `chiliproject_activity_module`.
+
+4. Execute the plugins migrations and make sure, that nothing happens.
+
+    rake db:migrate:plugin NAME=chiliproject_activity_module
+
+
 == Deinstallation
 
 Optionally run the down migration, that is included in this plugin. It will
