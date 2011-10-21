@@ -1,3 +1,9 @@
+= 3.0.1 - 2011-10-21
+
+Minor updates:
+
+* Removing tests for Redmine 0.9 compatibility
+
 = 3.0.0 - 2011-10-21
 
 Major updates:
