@@ -9,7 +9,7 @@ module ActivityModule
     end
 
     def major
-      2
+      3
     end
 
     def minor

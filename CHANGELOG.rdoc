@@ -1,3 +1,13 @@
+= 3.0.0 - 2011-10-21
+
+Major updates:
+
+* Removing Redmine from all internal and external names
+
+Minor updates:
+
+* Spec fix for changes in latest ChiliProject
+
 = 2.0.0 - 2011-07-22
 
 Major updates:
