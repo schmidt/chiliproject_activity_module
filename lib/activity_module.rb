@@ -1,4 +1,4 @@
-module RedmineActivityModule
+module ActivityModule
   def self.activate_activity_module_for_all_projects
     Project.find(:all).each do |p|
       p.enabled_module_names = ["activity"] | p.enabled_module_names
@@ -14,7 +14,7 @@ module RedmineActivityModule
   def self.add_activity_module_from_default_settings
     Setting["default_projects_modules"] = ["activity"] | Setting.default_projects_modules
   end
-  
+
   def self.remove_activity_module_from_default_settings
     Setting["default_projects_modules"] = Setting.default_projects_modules - ["activity"]
   end

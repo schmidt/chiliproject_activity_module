@@ -1,4 +1,4 @@
-= Redmine/ChiliProject Activity Module Plugin
+= ChiliProject Activity Module Plugin
 
 This Plugin makes activity a module, such that it can be activated and
 deactivated on a per-project setting.
@@ -8,9 +8,9 @@ It also includes a migration which
 * activates the newly introduced activity module in all existing projects
 * adds the activity module to the set of default modules for new projects
 
-It therefore simply restores the default Redmine/ChiliProject behaviour for all
-existing projects. You may then selectively deactivate the activity module in
-single projects selectively.
+It therefore simply restores the default ChiliProject behaviour for all existing
+projects. You may then selectively deactivate the activity module in single
+projects selectively.
 
 
 == Requirements
@@ -26,13 +26,12 @@ project's issue tracker.
 
 == Screenshots
 
-https://github.com/finnlabs/redmine_activity_module/raw/master/doc/screen-capture.png
+https://github.com/finnlabs/chiliproject_activity_module/raw/master/doc/screen-capture.png
 
 
 == Installation
 
-Please follow the default plugin installation instructions for
-Redmine/ChiliProject.
+Please follow the default plugin installation instructions for ChiliProject.
 
 Run the above mentioned migration at will.
 
@@ -49,8 +48,8 @@ directory.
 
 == Development
 
-To run the tests, you will need a current version of our {Redmine/ChiliProject
-Dev Tools}[https://github.com/finnlabs/redmine-dev-tools]. After running
+To run the tests, you will need a current version of our {ChiliProject Dev
+Tools}[https://github.com/finnlabs/redmine-dev-tools]. After running
 
     bundle install
 

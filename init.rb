@@ -1,19 +1,19 @@
 require 'redmine'
-require 'redmine_activity_module'
-require 'redmine_activity_module/version'
+require 'activity_module'
+require 'activity_module/version'
 
-Redmine::Plugin.register :redmine_activity_module do
-  name 'Redmine Activity Module Plugin'
+Redmine::Plugin.register :activity_module do
+  name 'ChiliProject Activity Module Plugin'
   author 'Gregor Schmidt'
   description 'This Plugin makes activity a module, such that it can be activated and deactivated on a per-project setting.'
-  version RedmineActivityModule::Version.full
-  url 'http://github.com/finnlabs/redmine_activity_module'
+  version ActivityModule::Version.full
+  url 'http://github.com/finnlabs/chiliproject_activity_module'
   author_url 'http://www.finn.de/'
 end
 
 
 require 'dispatcher'
-Dispatcher.to_prepare :redmine_activity_module do
+Dispatcher.to_prepare :activity_module do
   require_dependency 'application_controller'
   require_dependency 'redmine/access_control'
 
@@ -52,7 +52,7 @@ Dispatcher.to_prepare :redmine_activity_module do
     def (ActionController::IntegrationTest).inherited(sub)
       if sub.name == 'MenuManagerTest'
         sub.send(:define_method, :setup) do
-          RedmineActivityModule.activate_activity_module_for_all_projects
+          ActivityModule.activate_activity_module_for_all_projects
         end
       end
       super
@@ -60,7 +60,7 @@ Dispatcher.to_prepare :redmine_activity_module do
     def (ActionController::TestCase).inherited(sub)
       if sub.name == 'ActivitiesControllerTest'
         sub.send(:define_method, :setup) do
-          RedmineActivityModule.activate_activity_module_for_all_projects
+          ActivityModule.activate_activity_module_for_all_projects
         end
       end
       super

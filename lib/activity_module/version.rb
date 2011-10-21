@@ -1,4 +1,4 @@
-module RedmineActivityModule
+module ActivityModule
   module Version
     def to_s
       [major, minor, patch].join('.')
@@ -11,11 +11,11 @@ module RedmineActivityModule
     def major
       2
     end
-    
+
     def minor
       0
     end
-    
+
     def patch
       0
     end
