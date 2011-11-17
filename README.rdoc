@@ -101,6 +101,14 @@ not removed.
 There are known issues when running in development mode. If you are observing
 strange behaviour try deactivation the reloader or run in production mode.
 
+== Credits
+
+We would like to thank
+
+* Deutsche Telekom AG (opensource@telekom.de) for project sponsorhip
+* Birthe Russmeyer and Niels Lindenthal of finnlabs for their consulting and
+  project management
+
 == Licence
 
 (c) 2011 - Gregor Schmidt - Finn GmbH
